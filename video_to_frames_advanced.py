@@ -129,5 +129,3 @@ for p in tqdm(range(NB_PATIENTS), 'Patient'):
 
         # Move files after converting frames
         shutil.move(video_path, converted_files_path)
-
-        # --> end "for video_fn in tqdm(videos_for_patient...)"

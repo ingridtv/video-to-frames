@@ -81,6 +81,3 @@ for p_idx, filename in tqdm(enumerate(VIDEO_LIST), 'Patient'):
         plt.savefig(os.path.join(seq_dir, f'frame_{frnb:d}.png'))
         # plt.show()     # show() used only when debugging
         plt.close(fig)
-
-        #im = Image.fromarray(vid_reader.get_data(fr))       # Array: [H, W, 3]
-        #im.save(os.path.join(seq_dir, 'frame_{:d}.png'.format(frnb)), 'png')
