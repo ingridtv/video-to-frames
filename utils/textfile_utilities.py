@@ -78,65 +78,31 @@ def sort_data_by_row(data, has_header=False, include_header=False):
     return d
 
 
-def parse_ebus_video_file(filename):
+def parse_time_point_file(filename):
     """
-    Each video clip has one associated line in the file `filename`. Each
-    line in the file is formatted as:
-    Video file name;Start trim (s);End trim (s)
-
-    For example:
-    EBUS-20160215-202451.avi;1322;1415
-    EBUS-20210604-092427.avi;250;420
-    EBUS-20210608-091758.avi;515;745
-    ...
-
-    with time in seconds at which to trim the video given for each video clip.
-    """
-    from ebus.ebus_utils.video_utilities import VideoTrimmingLimits
-
-    data = read_csv_file(filename, include_header=True)
-    data_dict = sort_data_by_row(data, include_header=False)    # skip header
-
-    time_points_per_file = []
-    for key, entry in data_dict.items():
-        fn = entry['item']
-        trim_at = VideoTrimmingLimits(
-            t1=entry['start_time'],
-            t2=entry['end_time'],
-        )
-        time_points_per_file.append([fn, trim_at])
-
-    return time_points_per_file
-
-
-def parse_lymph_node_stations_file(filename):
-    """
-    Each video clip has one associated lymph node station and time file. Each
-    line in the file is formatted as:
-    Lymph node;Start trim (s);End trim (s)
-
-    For example:
-    4R;17.4;25.2
-    4L;34.1;39.5
-    7L;126.3;141.8
-    ...
-
-    with time in seconds given for each of the recorded lymph node stations.
+    Example function for how to parse and use a file with time points
+    associated with a video clip to extract sequences. Say each line in the
+    file is formatted as
+        indicator;start trim;end trim
+    with time given in seconds. The function will then return a list of
+        [indicator, VideoTrimmingLimits]
+    items to use when extracting sequences. The indicator can for example be a
+    short string describing the relevant part of the video
     """
 
-    from ebus.ebus_utils.video_utilities import VideoTrimmingLimits
+    from video_utilities import VideoTrimmingLimits
 
     data = read_csv_file(filename, has_header=False)    # files have no header
     data_dict = sort_data_by_row(data, has_header=False)
 
     time_points_per_station = []
     for key, entry in data_dict.items():
-        lymph_node = entry['item']
+        indicator = entry['item']
         trim_at = VideoTrimmingLimits(
             t1=entry['start_time'],
             t2=entry['end_time'],
         )
-        time_points_per_station.append([lymph_node, trim_at])
+        time_points_per_station.append([indicator, trim_at])
 
     return time_points_per_station
 
