@@ -35,10 +35,8 @@ from utils.video_utilities import VideoTrimmingLimits, get_trim_start_end_frames
 # =======================================================
 #   Set input/output folders and frame interval
 # =======================================================
-#INPUT_DATA_PATH = "/path/to/raw/videos"     # folder containing raw videos
-#OUTPUT_PATH = "/path/to/processed/dataset"  # folder in which to put the processed dataset
-INPUT_DATA_PATH = "./data/testdata/input"
-OUTPUT_PATH = "./data/testdata/output"
+INPUT_DATA_PATH = "/path/to/raw/videos"     # folder containing raw videos
+OUTPUT_PATH = "/path/to/processed/dataset"  # folder in which to put the processed dataset
 
 EXTRACT_FRAME_INTERVAL = 1  # Extract every x frames
 # =======================================================
