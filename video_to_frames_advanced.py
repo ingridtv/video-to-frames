@@ -79,7 +79,7 @@ for p in tqdm(range(NB_PATIENTS), 'Patient'):
         try:
             os.makedirs(seq_dir, exist_ok=False)
         except OSError as exc:
-            print(f"OSError: Lymph node station folder {seq_dir} probably already exists")
+            print(f"OSError: Sequence folder {seq_dir} probably already exists")
             exit(-1)
 
         # Get full path to video file and read video data
